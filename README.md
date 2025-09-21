@@ -31,6 +31,18 @@ Auth: Laravel Breeze
 🚀 O‘rnatish
 
 Repozitoriyani clone qiling:
-- git clone https://github.com/username/mini-stackoverflow.git
+- git clone https://github.com/Shoh-27/mini-stackoverflow.git
 - cd mini-stackoverflow
+Kutubxonalarni o'rnating
+- composer install
+- npm install && npm run dev
+- 
+.env faylini sozlang (DB nomi, user, password).
+
+Migratsiya va seederlarni ishga tushiring:
+- php artisan migrate --seed
+  
+Serverni ishga tushiring:
+- php artisan serve
+
 
