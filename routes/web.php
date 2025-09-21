@@ -25,4 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::post('/questions/{question}/answers', [\App\Http\Controllers\AnswerController::class, 'store'])
+    ->name('answers.store')
+    ->middleware('auth');
+
+
 require __DIR__.'/auth.php';

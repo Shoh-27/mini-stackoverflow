@@ -12,5 +12,30 @@
             </small>
         </p>
     </div>
+
+    <h2>Javoblar</h2>
+
+    @foreach($question->answers as $answer)
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ $answer->body }}</p>
+                <small>By {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}</small>
+            </div>
+        </div>
+    @endforeach
+
+    @auth
+        <form action="{{ route('answers.store', $question) }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="body">Sizning javobingiz:</label>
+                <textarea name="body" class="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Javob yuborish</button>
+        </form>
+    @else
+        <p>Javob yozish uchun <a href="{{ route('login') }}">kiring</a>.</p>
+    @endauth
+
 @endsection
 
