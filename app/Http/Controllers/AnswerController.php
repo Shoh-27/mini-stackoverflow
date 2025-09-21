@@ -10,17 +10,20 @@ class AnswerController extends Controller
 {
     public function store(Request $request, Question $question)
     {
-        $request->validate([
-            'body' => 'required|string|min:5',
-        ]);
+        $request->validate(['body' => 'required|string|min:5']);
 
-        $question->answers()->create([
+        $answer = $question->answers()->create([
             'body' => $request->body,
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->back()->with('success', 'Javob muvaffaqiyatli qo‘shildi!');
+        if($request->ajax()){
+            return response()->json(['answer' => $answer]);
+        }
+
+        return redirect()->back();
     }
+
 
     public function markBest(Answer $answer)
     {

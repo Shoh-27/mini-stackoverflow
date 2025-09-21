@@ -10,9 +10,7 @@ class AnswerVoteController extends Controller
 {
     public function vote(Request $request, Answer $answer)
     {
-        $request->validate([
-            'vote' => 'required|in:1,-1',
-        ]);
+        $request->validate(['vote' => 'required|in:1,-1']);
 
         $vote = AnswerVote::updateOrCreate(
             [
@@ -22,7 +20,12 @@ class AnswerVoteController extends Controller
             ['vote' => $request->vote]
         );
 
+        if($request->ajax()){
+            return response()->json(['vote_count' => $answer->votes()->sum('vote')]);
+        }
+
         return redirect()->back();
     }
+
 }
 
