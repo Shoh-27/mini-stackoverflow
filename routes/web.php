@@ -32,6 +32,10 @@ Route::post('/questions/{question}/answers', [\App\Http\Controllers\AnswerContro
 Route::post('/answers/{answer}/vote', [\App\Http\Controllers\AnswerVoteController::class,'vote'])
     ->name('answers.vote')
     ->middleware('auth');
+Route::post('/answers/{answer}/best', [\App\Http\Controllers\AnswerController::class, 'markBest'])
+    ->name('answers.best')
+    ->middleware('auth');
+
 
 
 
