@@ -17,4 +17,16 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function votes()
+    {
+        return $this->hasMany(AnswerVote::class);
+    }
+
+// Javobning umumiy reytingi
+    public function getVoteCountAttribute()
+    {
+        return $this->votes()->sum('vote');
+    }
+
 }
