@@ -20,6 +20,19 @@
             <div class="card-body">
                 <p>{{ $answer->body }}</p>
                 <small>By {{ $answer->user->name }} | {{ $answer->created_at->diffForHumans() }}</small>
+                <div class="mt-2">
+                    <form action="{{ route('answers.vote', $answer) }}" method="POST" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="vote" value="1">
+                        <button class="btn btn-sm btn-success">👍 {{ $answer->vote_count }}</button>
+                    </form>
+
+                    <form action="{{ route('answers.vote', $answer) }}" method="POST" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="vote" value="-1">
+                        <button class="btn btn-sm btn-danger">👎</button>
+                    </form>
+                </div>
             </div>
         </div>
     @endforeach

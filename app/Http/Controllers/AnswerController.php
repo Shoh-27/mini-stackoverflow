@@ -21,5 +21,24 @@ class AnswerController extends Controller
 
         return redirect()->back()->with('success', 'Javob muvaffaqiyatli qo‘shildi!');
     }
+
+    public function markBest(Answer $answer)
+    {
+        $question = $answer->question;
+
+        // Faqat savol egasi belgilashi mumkin
+        if (auth()->id() !== $question->user_id) {
+            abort(403);
+        }
+
+        // Avvalgi best answer bo‘lsa uni olib tashlash
+        $question->answers()->update(['is_best' => false]);
+
+        // Tanlangan javobni best deb belgilash
+        $answer->update(['is_best' => true]);
+
+        return redirect()->back()->with('success', 'Eng yaxshi javob belgilandi!');
+    }
+
 }
 

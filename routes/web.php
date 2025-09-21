@@ -29,5 +29,10 @@ Route::post('/questions/{question}/answers', [\App\Http\Controllers\AnswerContro
     ->name('answers.store')
     ->middleware('auth');
 
+Route::post('/answers/{answer}/vote', [\App\Http\Controllers\AnswerVoteController::class,'vote'])
+    ->name('answers.vote')
+    ->middleware('auth');
+
+
 
 require __DIR__.'/auth.php';
